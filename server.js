@@ -10,7 +10,10 @@ connectDB();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: [
+      "https://food-delivery-frontend-nu-three.vercel.app",
+      "http://localhost:3000"
+    ],
     credentials: true,
   })
 );

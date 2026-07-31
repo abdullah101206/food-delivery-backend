@@ -10,11 +10,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: [
-      process.env.CLIENT_URL,
-      "https://flavor-haven.vercel.app",
-      "http://localhost:3000"
-    ],
+    origin: "*",
     credentials: true,
   })
 );

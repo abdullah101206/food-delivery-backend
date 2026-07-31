@@ -11,7 +11,8 @@ connectDB();
 app.use(
   cors({
     origin: [
-      "https://food-delivery-frontend-nu-three.vercel.app",
+      process.env.CLIENT_URL,
+      "https://flavor-haven.vercel.app",
       "http://localhost:3000"
     ],
     credentials: true,
@@ -28,6 +29,10 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend Server running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Backend Server running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

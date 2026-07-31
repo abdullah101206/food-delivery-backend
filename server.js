@@ -12,6 +12,7 @@ app.use(
   cors({
     origin: [
       "https://food-delivery-frontend-nu-three.vercel.app",
+      "https://the-flavor-haven.vercel.app",
       "http://localhost:3000"
     ],
     credentials: true,

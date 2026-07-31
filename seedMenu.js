@@ -1,7 +1,8 @@
-require("dotenv").config();
 const mongoose = require("mongoose");
-const connectDB = require("./config/db");
 const MenuItem = require("./models/MenuItem");
+
+// Direct connection string (No .env dependency)
+const MONGO_URI = "mongodb://abdullah101206_db_user:ynTuWj2K35hPRYCK@ac-mqi1fuo-shard-00-00.fy9x6sn.mongodb.net:27017,ac-mqi1fuo-shard-00-01.fy9x6sn.mongodb.net:27017,ac-mqi1fuo-shard-00-02.fy9x6sn.mongodb.net:27017/restaurantDB?ssl=true&replicaSet=atlas-txxglu-shard-0&authSource=admin&appName=Cluster0";
 
 const menuItems = [
     { name: "Chicken Biryani", category: "Desi Food", image: "https://images.unsplash.com/photo-1701579231305-d84d8af9a3fd?w=800", price: 13.99, rating: 4.9, bestseller: true },
@@ -90,15 +91,20 @@ const menuItems = [
 
 const seedDatabase = async () => {
     try {
-        await connectDB();
+        await mongoose.connect(MONGO_URI);
+        console.log("✅ Connected to MongoDB directly!");
+
         await MenuItem.deleteMany({});
         await MenuItem.insertMany(menuItems);
-        console.log("Database seeded successfully!");
+
+        console.log("🎉 Database seeded successfully!");
         process.exit();
     } catch (err) {
-        console.error("Seeding error:", err);
+        console.error("❌ Seeding error:", err.message);
         process.exit(1);
     }
 };
 
 seedDatabase();
+
+

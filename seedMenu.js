@@ -96,15 +96,22 @@ const menuItems = [
     { name: "Lemon Iced Tea", category: "Drinks", image: "https://images.pexels.com/photos/33573166/pexels-photo-33573166.jpeg", price: 1.99, rating: 4.5, bestseller: false },
 ];
 
+const optimizedMenuItems = menuItems.map(item => ({
+    ...item,
+    image: item.image.includes('?') 
+        ? item.image 
+        : `${item.image}?auto=compress&cs=tinysrgb&w=600`
+}));
+
 const seedDatabase = async () => {
     try {
         await mongoose.connect(MONGO_URI);
         console.log("Connected to MongoDB directly!");
 
         await MenuItem.deleteMany({});
-        await MenuItem.insertMany(menuItems);
+        await MenuItem.insertMany(optimizedMenuItems);
 
-        console.log("Database seeded successfully!");
+        console.log("Database seeded with fast-loading images successfully!");
         process.exit();
     } catch (err) {
         console.error("Seeding error:", err.message);
@@ -113,5 +120,3 @@ const seedDatabase = async () => {
 };
 
 seedDatabase();
-
-

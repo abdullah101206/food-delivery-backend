@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const MenuItem = require("../models/MenuItem");
 
-// Get all menu items
 router.get("/", async (req, res) => {
   try {
     const items = await MenuItem.find();
@@ -12,7 +11,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Seed items via API (Optional)
 router.post("/seed", async (req, res) => {
   try {
     await MenuItem.deleteMany({});

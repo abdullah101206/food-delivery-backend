@@ -1,6 +1,5 @@
 const Reservation = require('../models/Reservation');
 
-// Create Reservation (Public)
 exports.createReservation = async (req, res) => {
   try {
     const { name, phone, guests, date, time, occasion, specialRequest } = req.body;
@@ -31,7 +30,6 @@ exports.createReservation = async (req, res) => {
   }
 };
 
-// Get All Reservations (Admin Only)
 exports.getAllReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find().sort({ createdAt: -1 });

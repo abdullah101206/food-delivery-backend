@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Order = require("../models/Order");
 
-// 1. PLACE ORDER (Checkout Page Call Karega)
 router.post("/", async (req, res) => {
   try {
     const {
@@ -39,10 +38,9 @@ router.post("/", async (req, res) => {
   }
 });
 
-// 2. GET ALL ORDERS (Admin Dashboard Call Karega)
 router.get("/", async (req, res) => {
   try {
-    const orders = await Order.find().sort({ createdAt: -1 }); // Naya order sabse pehle dikhayega
+    const orders = await Order.find().sort({ createdAt: -1 }); 
     res.status(200).json(orders);
   } catch (err) {
     console.error("Fetch orders error:", err);
@@ -50,7 +48,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// 3. UPDATE ORDER STATUS (Admin Dropdown Call Karega)
 router.patch("/:id/status", async (req, res) => {
   try {
     const { status } = req.body;
